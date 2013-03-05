@@ -1,0 +1,10 @@
+.link{ cursor: pointer; color:#0000E9; }
+.link:hover{text-decoration: underline;}
+
+#albums{ border-right:solid #000000 1px; overflow: auto;}
+#albums .album{ padding-left:15px; cursor: pointer; color:#0000E9; }
+
+#top{ position: fixed; top:0px; left:15%; background-color:red; height: 50%;}
+#bottom{ position: fixed; bottom:0px; left:15%; background-color:green; height: 50%;}
+#bottom .album_songs{ background-color:yellow; }
+#bottom .album_songs .song{}
