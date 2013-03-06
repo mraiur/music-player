@@ -30,7 +30,7 @@ foreach($list as $file){
     if(!is_dir($request_dir.$file) && strstr($file, ".mp3")){
         $return[] = array(
             "name" => $file,
-            "path" => $get_dir . $file
+            "path" => $get_dir . "/" . $file
         );
     }
 }
