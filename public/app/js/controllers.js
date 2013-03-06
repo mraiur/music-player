@@ -18,6 +18,14 @@ function DirectoriesList($scope, $http) {
         });    
     };
 
+    $scope.deleteAllSongs = function(){
+        $scope.playlistsongs.length = 0;
+        $scope.playlistsongs = [];
+        if(player.playing){
+            player.pause();
+        }
+    };
+
     $scope.addAllSongs = function(songs){
         var cnt = 0,
             numCnt = songs.length;

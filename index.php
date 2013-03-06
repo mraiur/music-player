@@ -39,6 +39,7 @@
                     <tr>
                         <td>
                             <div class="btn" ng-click="addAllSongs(directorysongs)">Add All</div>
+                            <div class="btn" ng-click="deleteAllSongs()">Clear playlist</div>
                         </td>
                     </tr>
                     <tr ng-repeat="song in directorysongs">
