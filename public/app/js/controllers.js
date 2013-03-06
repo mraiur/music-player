@@ -2,10 +2,9 @@
 
 /* Controllers */
 function DirectoriesList($scope, $http) {
-    /*$scope.$watch("CurrentListAlbum",function(){
-        console.log("DA", arguments);
-    });*/
-    
+    $scope.currentSongIndex = 0;
+    $scope.playlistsongs = [];
+
     $scope.selectAlbum = function(dir){
         $http({
             url : 'public/app/directories/songs.php',
@@ -15,6 +14,7 @@ function DirectoriesList($scope, $http) {
             method : 'get'
         }).success(function(data) {
             $scope.directorysongs = data;
+            player.trackEnded = songFinished;
         });    
     };
 
@@ -23,46 +23,67 @@ function DirectoriesList($scope, $http) {
             numCnt = songs.length;
 
         for(; cnt < numCnt; cnt++){
-            playlistsongs.push(prepareSong(songs[cnt]));
+            songs[cnt].playing = false;
+            $scope.playlistsongs.push(songs[cnt]);
         }
+
         runPlaylist();
+
+    };
+
+    $scope.addSong = function(song){
+        $scope.playlistsongs.push(song);
+        runPlaylist();
+    };
+
+    $scope.deleteSong = function(index){
+        var cloneArray = [];
+        angular.forEach($scope.playlistsongs, function(item, cnt){
+            if(cnt != index){
+                cloneArray.push(item);
+            }
+        })
+        $scope.playlistsongs.length = 0;
+        $scope.playlistsongs = cloneArray;
+        if(this.$root.$$phase != "$apply"){
+            $scope.$digest();
+        }
     };
 
     function runPlaylist(){
-        //if(player.loaded){
-            //player.load(playlistsongs);
-        //}else{
-            player.setup({
-                playlist : playlistsongs,
-                height: "100%",
-                controls : true,
-                autostart : true,
-                primary: "html5",
-                image: "./public/img/default.png",
-                listbar: {
-                    position: 'bottom',
-                    size: "80%"
-                }
-            });
-            //player.loaded = true;
-        //}
+        if(player.playing == false){
+            $scope.playSong($scope.currentSongIndex);
+        }
     }
 
-    function prepareSong(song){
-        return {
-            image: "./public/img/default.png",
-            sources: [
-                { file: song.path }
-            ],
-            title: song.name
-        };
+    function songFinished(){
+        if($scope.currentSongIndex === $scope.playlistsongs.length-1){
+            
+        }else{
+
+            var index = $scope.currentSongIndex+1;
+            $scope.playSong(index);
+        }
     }
 
-    $scope.addSong = function(song){
-        playlistsongs.push(prepareSong(song));
-
-        runPlaylist();
+    $scope.playSong = function(index){
+        //player.load($scope.playlistsongs[index].path);
+        //player.play();
+        $scope.currentSongIndex = index;
+        // force ng-repeat
+        var cloneArray = [];
+        angular.forEach($scope.playlistsongs, function(item){
+           cloneArray.push(item);
+        })
+        $scope.playlistsongs.length = 0;
+        $scope.playlistsongs = cloneArray;
+        if(this.$root.$$phase != "$apply"){
+            $scope.$digest();
+        }
+        // end force ng-repeat
     };
+
+   
 
     $http({
         url : 'public/app/directories/directories.php',

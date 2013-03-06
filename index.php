@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="./public/css/app.css">
         <link rel="stylesheet" href="./public/css/bootstrap.css">
         <script type="text/javascript" src="./public/config.php?view=jsobject"></script>
-        <script type="text/javascript" src="./public/player/jwplayer.js"></script>
+        <script type="text/javascript" src="./public/player/audio.min.js"></script>
         <script type="text/javascript" src="./public/js/angular.min.js"></script>
         <script type="text/javascript" src="./public/app/js/app.js"></script>
         <script type="text/javascript" src="./public/app/js/controllers.js"></script>
@@ -17,7 +17,7 @@
 <body ng-controller="DirectoriesList">
     <div class="container-fluid">
         <div class="row-fluid">
-            <div class="span2" id="albums">
+            <div class="span4" id="albums">
                 <table class="table table-bordered">
                     <tr ng-repeat="dir in directories">
                         <td>
@@ -29,8 +29,13 @@
                     </tr>
                 </table>
             </div>
-            <div class="span10" id="center">
+            <div class="span4" id="center">
                 <table class="table table-bordered">
+                    <tr>
+                        <td align="center">
+                            <div id="musicplayer"><audio id="player"></audio></div>
+                        </td>
+                    </tr>
                     <tr>
                         <td>
                             <div class="btn" ng-click="addAllSongs(directorysongs)">Add All</div>
@@ -43,14 +48,24 @@
                     </tr>
                 </table>
             </div>
-        </div>
-        <div class="span10" id="right">
-            <div id="musicplayer">Loading the player...</div>
+            <div class="span4" id="right">
+                <table class="table table-bordered">
+                    <tr ng-repeat="song in playlistsongs">
+                        <td class="link">
+                            <div class="song current" ng-show="$index==currentSongIndex">{{song.name}}</div>
+                            <div class="song" ng-show="$index!=currentSongIndex">
+                                <span ng-click="playSong($index)">{{song.name}}</span>
+                                <span ng-click="deleteSong($index)" class="delete icon-trash"></span>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
     <script type="text/javascript">
-        var player = jwplayer("musicplayer");
-        ////file: "http://dev.mraiur.com/music/test.mp3"
+        var currentSongIndex = 0;
+        var player = audiojs.newInstance(document.getElementById("player"));
     </script>
 
 </body>

@@ -29,8 +29,10 @@ $list = scandir($request_dir);
 foreach($list as $file){
     if(!is_dir($request_dir.$file) && strstr($file, ".mp3")){
         $return[] = array(
+            "image" => "./public/img/default.png", 
             "name" => $file,
-            "path" => $get_dir . "/" . $file
+            "path" => $get_dir . "/" . $file,
+            "hash" => md5($get_dir . "/" . $file)
         );
     }
 }

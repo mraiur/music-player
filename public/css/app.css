@@ -1,10 +1,13 @@
 .link{ cursor: pointer; color:#0000E9; }
 .link:hover{text-decoration: underline;}
 
-#albums{ overflow: auto;}
+#albums{ overflow: auto; height: 100%;}
 #albums .album{ padding-left:15px; cursor: pointer; color:#0000E9; }
 
-#center{ position: fixed; top:0px; left:15%; width:45%; height: 100%; overflow: auto;}
-#right{ position: fixed; top:0px; right:0; width:35%; height: 100%;}
+#center{ height: 100%; overflow: auto;}
+#right{ height: 100%; overflow: auto;}
+#right .song{ padding-left:20px; position: relative;}
+#right .song .delete{ position: absolute; right:4px;}
+#right .current{ background:url(../img/play.png) center left no-repeat; }
 
 #bottom{ position: fixed; bottom:0px; left:15%;height: 50%;}
