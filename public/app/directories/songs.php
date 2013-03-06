@@ -31,8 +31,7 @@ foreach($list as $file){
         $return[] = array(
             "image" => "./public/img/default.png", 
             "name" => $file,
-            "path" => $get_dir . "/" . $file,
-            "hash" => md5($get_dir . "/" . $file)
+            "path" => $get_dir . "/" . $file
         );
     }
 }

@@ -67,8 +67,8 @@ function DirectoriesList($scope, $http) {
     }
 
     $scope.playSong = function(index){
-        //player.load($scope.playlistsongs[index].path);
-        //player.play();
+        player.load($scope.playlistsongs[index].path);
+        player.play();
         $scope.currentSongIndex = index;
         // force ng-repeat
         var cloneArray = [];

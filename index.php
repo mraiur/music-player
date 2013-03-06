@@ -21,7 +21,7 @@
                 <table class="table table-bordered">
                     <tr ng-repeat="dir in directories">
                         <td>
-                            <h4>{{dir.name}}</h4> 
+                            <h4 ng-click="selectAlbum(dir.name)">{{dir.name}}</h4> 
                             <div class="album link" ng-repeat="album in dir.children" ng-click="selectAlbum(dir.name+'/'+album.name)">
                                 {{album.name}}
                             </div>

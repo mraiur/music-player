@@ -1,7 +1,7 @@
 <?php
 $root = realpath(dirname(__FILE__)."/../")."/";
 $host = 'http://'.$_SERVER['HTTP_HOST'].str_replace("public/config.php", "", $_SERVER['PHP_SELF']);
-$exclude_dirs = array(".", "..", "public");
+$exclude_dirs = array(".", "..", "public", ".git");
 $dynamic_dir_scan = true;
 
 $public = array(
