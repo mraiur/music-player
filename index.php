@@ -19,6 +19,11 @@
         <div class="row-fluid">
             <div class="span4" id="albums">
                 <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th><h3>Artist / Albums</h3></th>
+                        </tr>
+                    </thead>
                     <tr ng-repeat="dir in directories">
                         <td>
                             <h4 ng-click="selectAlbum(dir.name)">{{dir.name}}</h4> 
@@ -42,6 +47,9 @@
                             <div class="btn" ng-click="deleteAllSongs()">Clear playlist</div>
                         </td>
                     </tr>
+                    <tr>
+                        <th><h3>Songs</h3></th>
+                    </tr>
                     <tr ng-repeat="song in directorysongs">
                         <td ng-click="addSong(song)" class="link">
                             {{song.name}}
@@ -51,6 +59,11 @@
             </div>
             <div class="span4" id="right">
                 <table class="table table-bordered">
+                     <thead>
+                        <tr>
+                            <th><h3>Playlist</h3></th>
+                        </tr>
+                    </thead>
                     <tr ng-repeat="song in playlistsongs">
                         <td class="link">
                             <div class="song current" ng-show="$index==currentSongIndex">{{song.name}}</div>

@@ -11,3 +11,7 @@
 #right .current{ background:url(../img/play.png) center left no-repeat; }
 
 #bottom{ position: fixed; bottom:0px; left:15%;height: 50%;}
+
+h3{
+    text-align: center;
+}
