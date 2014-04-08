@@ -1,7 +1,7 @@
 'use strict';
 
 function DirectoriesList($scope, $http) {
-    console.log("DA");
+    alert("DAasdasdasdasd");
   $http.get(config.server+"directories.php").success(function(data) {
     $scope.directories = data;
   });

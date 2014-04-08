@@ -1,7 +1,10 @@
+body, html, .container-fluid{
+	height:100%;
+}
 .link{ cursor: pointer; color:#0000E9; }
 .link:hover{text-decoration: underline;}
 
-#albums{ overflow: auto; height: 100%;}
+#albums{ overflow: auto; height:800px;}
 #albums .album{ padding-left:15px; cursor: pointer; color:#0000E9; }
 
 #center{ height: 100%; overflow: auto;}
