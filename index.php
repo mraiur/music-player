@@ -5,8 +5,7 @@
         <script type="text/javascript">
             var playlistsongs =  [];
         </script>
-        <link rel="stylesheet" href="./public/css/app.css">
-        <link rel="stylesheet" href="./public/css/bootstrap.css">
+        <link rel="stylesheet" href="./public/css/commun.css">
         <script type="text/javascript" src="./public/config.php?view=jsobject"></script>
         <script type="text/javascript" src="./public/player/audio.min.js"></script>
         <script type="text/javascript" src="./public/js/angular.min.js"></script>
