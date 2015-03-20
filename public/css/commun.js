@@ -94,3 +94,14 @@ h3 {
 #musicplayer {
 	margin-left: 80px;
 }
+
+#volumeBar {
+	background-color : #444444;
+	width: 113px;
+	float: right;
+	margin-right: 98px;
+	border-left: 1px solid #000;
+	margin-top: -12px;
+	border-bottom-right-radius: 4px;
+	
+}
