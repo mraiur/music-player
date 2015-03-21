@@ -103,5 +103,5 @@ h3 {
 	border-left: 1px solid #000;
 	margin-top: -12px;
 	border-bottom-right-radius: 4px;
-	
+	padding: 1px;
 }
