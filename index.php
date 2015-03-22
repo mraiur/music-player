@@ -5,8 +5,7 @@
         <script type="text/javascript">
             var playlistsongs =  [];
         </script>
-        <link rel="stylesheet" href="./public/css/app.css">
-        <link rel="stylesheet" href="./public/css/bootstrap.css">
+	<link rel="stylesheet" href="./public/css/commun.css">
         <script type="text/javascript" src="./public/config.php?view=jsobject"></script>
         <script type="text/javascript" src="./public/player/audio.min.js"></script>
         <script type="text/javascript" src="./public/js/angular.min.js"></script>
@@ -43,7 +42,9 @@
                 <table class="table table-bordered">
                     <tr>
                         <td align="center">
-                            <div id="musicplayer"><audio id="player"></audio></div>
+				<div id="musicplayer"><audio id="player"></audio>
+				<input type="range" id="volumeBar" min="0" max="1" step="0.01" value="1" onChange="changeVolume(this.value);"/>
+				</div>
                         </td>
                     </tr>
                     <tr>
@@ -85,7 +86,11 @@
     <script type="text/javascript">
         var currentSongIndex = 0;
         var player = audiojs.newInstance(document.getElementById("player"));
+	
+	function changeVolume(n) {
+		var player = document.getElementById("player");
+		player.volume = n;
+	}
     </script>
-
 </body>
 </html>
