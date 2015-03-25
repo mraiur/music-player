@@ -18,3 +18,18 @@ body, html, .container-fluid{
 h3{
     text-align: center;
 }
+
+
+#volumeBar {
+	background-color : #444444;
+	width: 113px;
+	float: right;
+	border-left: 1px solid #000;
+	margin-top: -12px;
+	border-radius: 0px;
+	border-bottom-right-radius: 4px;
+	padding: 1px;
+	border-top-width: 0px;
+	padding-top: 0px;
+	border-right : 0px;
+}

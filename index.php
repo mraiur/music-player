@@ -43,7 +43,9 @@
                 <table class="table table-bordered">
                     <tr>
                         <td align="center">
-                            <div id="musicplayer"><audio id="player"></audio></div>
+				<div id="musicplayer"><audio id="player"></audio>
+				<input type="range" id="volumeBar" min="0" max="1" step="0.01" value="1" onmousemove="changeVolume(this.value);" onchange="changeVolume(this.value);" />
+				</div>
                         </td>
                     </tr>
                     <tr>
@@ -85,6 +87,11 @@
     <script type="text/javascript">
         var currentSongIndex = 0;
         var player = audiojs.newInstance(document.getElementById("player"));
+        
+	function changeVolume(n) {
+		var player = document.getElementById("player");
+		player.volume = n;
+	}
     </script>
 
 </body>
