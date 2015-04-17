@@ -1,5 +1,5 @@
 <?php
-require_once "../../config.php";
+require_once "../../../config.php";
 $return = array();
 function scanFolders($dir){
     global $exclude_dirs;

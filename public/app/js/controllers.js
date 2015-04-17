@@ -14,15 +14,22 @@ function DirectoriesList($scope, $http) {
             method : 'get'
         }).success(function(data) {
             $scope.directorysongs = data;
-            player.trackEnded = songFinished;
+
+            if(config.musicPlayer == 'flash') {
+                player.trackEnded = songFinished;
+            } else if( config.musicPlayer == 'native' ) {
+                appPlayer.onTrackEnd( songFinished );
+            }
         });    
     };
 
     $scope.deleteAllSongs = function(){
         $scope.playlistsongs.length = 0;
         $scope.playlistsongs = [];
-        if(player.playing){
-            player.pause();
+
+        if( appPlayer.isPlaying() ){
+            //player.pause();
+            appPlayer.pause();
         }
     };
 
@@ -59,7 +66,7 @@ function DirectoriesList($scope, $http) {
     };
 
     function runPlaylist(){
-        if(player.playing == false){
+        if( appPlayer.isPlaying() == false){
             $scope.playSong($scope.currentSongIndex);
         }
     }
@@ -75,14 +82,14 @@ function DirectoriesList($scope, $http) {
     }
 
     $scope.playSong = function(index){
-        player.load($scope.playlistsongs[index].path);
-        player.play();
+        appPlayer.play( $scope.playlistsongs[index].path, $scope);
+
         $scope.currentSongIndex = index;
         // force ng-repeat
         var cloneArray = [];
         angular.forEach($scope.playlistsongs, function(item){
            cloneArray.push(item);
-        })
+        });
         $scope.playlistsongs.length = 0;
         $scope.playlistsongs = cloneArray;
         if(this.$root.$$phase != "$apply"){
@@ -91,16 +98,10 @@ function DirectoriesList($scope, $http) {
         // end force ng-repeat
     };
 
-   
-
     $http({
         url : 'public/app/directories/directories.php',
         method : "get"
     }).success(function(data) {
         $scope.directories = data;
     });
-}
-
-function ReadAlbum(){
-    console.log("DA", arguments);
 }

@@ -1,14 +1,11 @@
 <?php
-$root = realpath(dirname(__FILE__)."/../")."/";
-$host = 'http://'.$_SERVER['HTTP_HOST'].str_replace("public/config.php", "", $_SERVER['PHP_SELF']);
-$library = $root."library/";
-$exclude_dirs = array(".", "..", "public", ".git");
-$dynamic_dir_scan = true;
+require_once dirname(__FILE__)."/../config.php";
 
 $public = array(
     "host" => $host,
     "library" => "library",
-    "server" => $host."public/"
+    "server" => $host."public/",
+    "musicPlayer" => $music_player
 );
 if(isset($_GET['view'])){
     if($_GET['view'] == "jsobject"){

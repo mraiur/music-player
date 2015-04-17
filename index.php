@@ -1,3 +1,6 @@
+<?php
+require_once "config.php";
+?>
 <!DOCTYPE html>
 <html lang="en" ng-app>
     <head>
@@ -7,8 +10,13 @@
         </script>
         <link rel="stylesheet" href="./public/css/app.css">
         <link rel="stylesheet" href="./public/css/bootstrap.css">
-        <script type="text/javascript" src="./public/config.php?view=jsobject"></script>
+        <script type="text/javascript" src="./public/app.php?view=jsobject"></script>
+        <script type="text/javascript" src="./public/app/js/appPlayer.js"></script>
+        <?php if($music_player === 'flash') { ?>
         <script type="text/javascript" src="./public/player/audio.min.js"></script>
+        <?php } else if($music_player === 'native' ) { ?>
+
+        <?php } ?>
         <script type="text/javascript" src="./public/js/angular.min.js"></script>
         <script type="text/javascript" src="./public/app/js/app.js"></script>
         <script type="text/javascript" src="./public/app/js/controllers.js"></script>
@@ -31,7 +39,7 @@
                     </thead>
                     <tr ng-repeat="dir in directories">
                         <td>
-                            <h4 ng-click="selectAlbum(dir.name)">{{dir.name}}</h4> 
+                            <h4 ng-click="selectAlbum(dir.name)">{{dir.name}}</h4>
                             <div class="album link" ng-repeat="album in dir.children" ng-click="selectAlbum(dir.name+'/'+album.name)">
                                 {{album.name}}
                             </div>
@@ -43,11 +51,25 @@
                 <table class="table table-bordered">
                     <tr>
                         <td align="center">
-				<div id="musicplayer"><audio id="player"></audio>
-				<input type="range" id="volumeBar" min="0" max="1" step="0.01" value="1" onmousemove="changeVolume(this.value);" onchange="changeVolume(this.value);" />
-				</div>
+                            <div id="musicplayer">
+
+                                <?php if($music_player === 'flash') { ?>
+                                    <audio id="player"></audio>
+                                <?php } else if( $music_player === 'native' ) { ?>
+                                    <audio controls id="player" class="native-player">
+                                        <source src="{{currentSongPath}}" type="audio/mpeg">
+                                    </audio>
+                                <?php } ?>
+                            </div>
                         </td>
                     </tr>
+                    <?php if($music_player === 'flash') { ?>
+                    <tr>
+                        <td>
+                            <input type="range" id="volumeBar" min="0" max="1" step="0.01" value="1" onmousemove="changeVolume(this.value);" onchange="changeVolume(this.value);" />
+                        </td>
+                    </tr>
+                    <?php } ?>
                     <tr>
                         <td>
                             <div class="btn" ng-click="addAllSongs(directorysongs)">Add All</div>
@@ -86,8 +108,13 @@
     </div>
     <script type="text/javascript">
         var currentSongIndex = 0;
-        var player = audiojs.newInstance(document.getElementById("player"));
-        
+
+        if(config.musicPlayer == 'flash') {
+            appPlayer.player = audiojs.newInstance(document.getElementById("player"));
+        } else if( config.musicPlayer == 'native'){
+            appPlayer.player = appPlayer.nativePlayer();
+        }
+
 	function changeVolume(n) {
 		var player = document.getElementById("player");
 		player.volume = n;

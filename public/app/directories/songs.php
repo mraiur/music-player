@@ -1,5 +1,5 @@
 <?php
-require_once "../../config.php";
+require_once "../../app.php";
 $return = array();
 $get_dir = isset($_GET['dir'])?strip_tags($_GET['dir']):false;
 
