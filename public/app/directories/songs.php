@@ -12,7 +12,7 @@ if($get_dir===false){
     error_message();
 }
 
-$request_dir = $root.$get_dir;
+$request_dir = $library.$get_dir;
 if(realpath($request_dir)===false){
     error_message();
 }
@@ -29,9 +29,9 @@ $list = scandir($request_dir);
 foreach($list as $file){
     if(!is_dir($request_dir.$file) && strstr($file, ".mp3")){
         $return[] = array(
-            "image" => "./public/img/default.png", 
+            "image" => "./public/img/default.png",
             "name" => $file,
-            "path" => $get_dir . "/" . $file
+            "path" => $public['library'].'/'.$get_dir . "/" . $file
         );
     }
 }

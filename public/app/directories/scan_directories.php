@@ -10,7 +10,7 @@ function scanFolders($dir){
     }
 
     $list = scandir($dir);
-    
+
 
     foreach($list as $row){
         if(is_dir($dir.$row) && !in_array($row, $exclude_dirs)){
@@ -23,7 +23,7 @@ function scanFolders($dir){
     return $dirs;
     //echo "<pre>".print_r($list, true)."</pre>";
 }
-$dirs = scanFolders($root);
+$dirs = scanFolders($library);
 if($dynamic_dir_scan === true){
     echo json_encode($dirs);
 }else{
