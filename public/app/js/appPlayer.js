@@ -1,44 +1,40 @@
 var appPlayer = {
     player: false,
+    onTrackEnd: function(){},
+    el: null,
+
     nativePlayer: function(){
-        var el = document.getElementById('player');
-        var player = angular.element( el );
+        var me = this;
+        me.el = document.getElementById('player');
+
+        var player = angular.element( me.el );
         var interval = null;
         var stopTrackFinish = function(){
              if(interval!== null ){
                 clearTimeout(interval);
-            }
-            var duration =  (el.duration, el.currentTime ); 
-            console.log(duration);
+             }
+        }
+
+        var trackFinish = function(){
+            stopTrackFinish();           
+            var duration =  ( me.el.duration - me.el.currentTime ) * 1000 ; 
 
             if( duration > 0 ){
                 interval = setTimeout(function(){
-                    console.log('finish');
-                },duration);
-                
-                console.log(duration);
+                    me.onTrackEndCallback();
+                }, duration);
             }
-        }
-        var trackFinish = function(){
-            stopTrackFinish();           
-        };
 
+        };
         player.bind('playing', function(){
-            console.log('playing', document.getElementById('player').currentTime);
             appPlayer.playing = true;
             trackFinish();
         });
 
         player.bind('pause', function(){
-            console.log('pause');
             appPlayer.playing = false;
             stopTrackFinish();
         });
-
-        player.bind('currentTime', function(){
-            console.log( player.currentTime );
-        });
-
     },
 
     playing: false,
@@ -55,7 +51,6 @@ var appPlayer = {
             var player = document.getElementById('player');
             player.src = songPath;
             player.play();
-            //scope.currentSongPath = songPath;
         }
     },
 
@@ -72,10 +67,13 @@ var appPlayer = {
     },
 
     onTrackEnd: function( callback ){
+        this.onTrackEndCallback = callback;
+        /*
+        // Has problems due to network load.
         var player = angular.element( document.getElementById('player') );
         player.bind('ended', function(){
             console.log('asdasdasd');
             callback();
-        });
+        });*/
     }
 };
